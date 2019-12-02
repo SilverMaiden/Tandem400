@@ -1,4 +1,5 @@
 import React, {Component}from "react";
+import QuestionSelection from "./QuestionSelection";
 let sortingQuestions =  {
     question1: {
         question: "Which of the following would you most hate people to call you?",
@@ -23,12 +24,9 @@ class QuizForm extends Component {
         return (
             <>
                 This is the Quiz Form.
-                <form>
-                    {sortingQuestions.question1.answers.map(() => {
-                        console.log("Woot");
-                        })
-                    }
-                </form>
+                    <QuestionSelection question={sortingQuestions.question1} />
+                    <QuestionSelection question={sortingQuestions.question2} />
+                    <QuestionSelection question={sortingQuestions.question3} />
             </>
         )
     }
