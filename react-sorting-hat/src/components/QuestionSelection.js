@@ -1,17 +1,20 @@
 import React from "react";
 
 const QuestionSelection = (props) => {
-
     return (
-        <>
-            <h1> {props.question.question} </h1>
+        <div>
+                <h4> {props.question.question} </h4>
+                <div>
+                    {props.question.answers.map(element => (
+                       <div>
+                        <input type="radio" name={element} value={element} />
+                        <label>{element}</label>
+                        </div>
+                    ))}
+                </div>
+                <br />
 
-            <form>
-                {props.question.answers.map(element => (
-                    <li> {element} </li>
-                ))}
-            </form>
-        </>
+        </div>
 
     )
 }
