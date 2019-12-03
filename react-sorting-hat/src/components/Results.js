@@ -1,86 +1,60 @@
-import React from "react";
-
-const houses = {
-    Gryffindor: {
-                    answers: [
-                        "Cowardly",
-                        "Glory",
-                        "The Brave",
-                        "The statue of an old wizard with a strangely twinkling eye",
-                        "The small pewter box, unassuming and plain, with a scratched message upon it that reads: I open only for the worthy.",
-                        "Boredom"
-                    ],
-    },
-
-    RavenClaw: {
-                        answers: [
-                            "Ignorant",
-                            "Wisdom",
-                            "The Wise",
-                            "The bubbling pool, in the depths of which something luminous is swirling",
-                            "The gleaming jet black box with a silver lock and key, marked with a mysterious rune that you know to be the mark of Merlin.",
-                            "Hunger"
-                        ],
-
-    },
-
-    HufflePuff: {
-                        answers: [
-                            "Selfish",
-                            "Love",
-                            "The Good",
-                            "The fat red toadstools that appear to be talking to each other",
-                            "The small tortoiseshell box, embellished with gold, inside which some small creature seems to be squeaking.",
-                            "Cold"
-                        ],
-    },
-    Slytherin: {
-                        answers: [
-                            "Ordinary",
-                            "Power",
-                            "The Bold",
-                            "The silver leafed tree bearing golden apples",
-                            "The gleaming jet black box with a silver lock and key, marked with a mysterious rune that you know to be the mark of Merlin.",
-                            "Loneliness"
-                ],
-    }
-}
+import React, {useState, useEffect} from "react";
+import {houses} from "../data";
+import HousePage from "./HousePage";
 
 const Results = (props) => {
 
-    let userAnswers = Object.values(props.location.state.userAnswers);
+    const [userHouse, setUserHouse] = useState([]);
+    const [userHouseData, setUserHouseData] = useState([]);
 
-    let pointsList = {G: 0, R: 0, H:0, S: 0};
 
+    useEffect(() => {
+        let userAnswers = Object.values(props.location.state.userAnswers);
+        let pointsList = {G: 0, R: 0, H:0, S: 0};
+        let answersArr = houses.Gryffindor.answers.concat(
+                            houses.RavenClaw.answers.concat(
+                                houses.HufflePuff.answers.concat(
+                                    houses.Slytherin.answers)));
 
-    userAnswers.map(answer => {
-        if (houses.RavenClaw.answers.includes(answer)){
-            pointsList.R += 1;
-        } else if (houses.Gryffindor.answers.includes(answer)){
-            pointsList.G += 1;
-        } else if (houses.HufflePuff.answers.includes(answer)){
-            pointsList.H += 1;
-        } else if (houses.Slytherin.answers.includes(answer)){
-            pointsList.S += 1;
-        } else {
-            console.log("Something has gone wrong :(");
+        userAnswers.map(answer => {
+            if (houses.RavenClaw.answers.includes(answer)){
+                pointsList.R += 1;
+            } else if (houses.Gryffindor.answers.includes(answer)){
+                pointsList.G += 1;
+            } else if (houses.HufflePuff.answers.includes(answer)){
+                pointsList.H += 1;
+            } else if (houses.Slytherin.answers.includes(answer)){
+                pointsList.S += 1;
+            } else {
+                console.log("Something has gone wrong :(");
+            }
+        })
+
+        let max_key = Object.keys(pointsList).reduce((a, b) => pointsList[a] > pointsList[b] ? a : b);
+        switch(max_key) {
+            case "G":
+                setUserHouse("Gryffindor");
+                break;
+            case "R":
+                setUserHouse("RavenClaw");
+                break;
+            case "H":
+                setUserHouse("HufflePuff");
+                break;
+            case "S":
+                setUserHouse("Slytherin");
+                break;
+            default:
+                console.log("Hmm, seems to have been an error.");
         }
-    })
+        setUserHouseData(houses[userHouse]);
+    }, [userHouse]);
 
-    console.log(pointsList);
-    let max=0;
-    let userHouse = '';
-    let valArr = [];
-
-    let pointsKeys = Object.keys(pointsList);
-    let pointsVals = Object.values(pointsList);
-    console.log(pointsKeys, pointsVals);
-
-    //Now for some calculations
+    let userHouseStr = userHouse;
     return (
         <div>
             <h1> Here are your results!</h1>
-            <p> You are a {userHouse} </p>
+            {userHouseData ? <HousePage house={userHouse} data={userHouseData} /> : <p> Loading... </p>}
         </div>
     )
 }
