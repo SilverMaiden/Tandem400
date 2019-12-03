@@ -1,20 +1,22 @@
-import React from "react";
+import React, {useState} from "react";
 
 const QuestionSelection = (props) => {
-    return (
-        <div>
-                <h4> {props.question.question} </h4>
-                <div>
-                    {props.question.answers.map(element => (
-                       <div>
-                        <input type="radio" name={element} value={element} />
-                        <label>{element}</label>
-                        </div>
-                    ))}
-                </div>
-                <br />
 
-        </div>
+    return (
+                            <div>
+                                <h4> {props.question} </h4>
+                                {props.answers.map(element => (
+                                   <div>
+                                        <input
+                                            type="radio"
+                                            name={props.name}
+                                            value={element}
+                                            onChange={props.handleChange}
+                                        />
+                                        <label>{element}</label>
+                                    </div>
+                                ))}
+                            </div>
 
     )
 }
