@@ -3,11 +3,12 @@ import React, {useState} from "react";
 const QuestionSelection = (props) => {
 
     return (
-                            <div>
+                            <div className="column">
                                 <h4> {props.question} </h4>
                                 {props.answers.map(element => (
-                                   <div>
+                                   <div className="answers">
                                         <input
+
                                             type="radio"
                                             name={props.name}
                                             value={element}

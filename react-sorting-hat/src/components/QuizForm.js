@@ -1,5 +1,5 @@
 import React, {Component}from "react";
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import QuestionSelection from "./QuestionSelection";
 let sortingQuestions =  [
     {
@@ -49,6 +49,7 @@ let sortingQuestions =  [
 
 ]
 
+let validForm = false;
 class QuizForm extends Component {
     constructor() {
         super();
@@ -64,6 +65,18 @@ class QuizForm extends Component {
             }
         }
     }
+    componentDidUpdate() {
+        let questionsAnswers = Object.values(this.state.userAnswers);
+        questionsAnswers.map(answer => {
+            switch(answer) {
+                case '' :
+                    validForm = true;
+
+            }
+        });
+
+
+    }
 
     toggleChangeHandler = e => {
         const property = e.target.name;
@@ -75,16 +88,16 @@ class QuizForm extends Component {
 
     handleSubmit = e => {
         e.preventDefault();
-        console.log(this.state.userAnswers);
     }
 
     render() {
+        let path = validForm ? '/results':'/sorting_quiz';
         return (
-            <div>
+            <div className="form-container">
                 This is the Quiz Form.
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={this.handleSubmit}  className="myborder">
                 {this.state.sortingQuestions.map(singleQuestion => (
-                        <div>
+                        <div >
                             <QuestionSelection
                                 name={singleQuestion.name}
                                 question={singleQuestion.question}
@@ -93,12 +106,16 @@ class QuizForm extends Component {
                             />
                         </div>
                 ))}
+
                 <Link to={{
-                    pathname: '/results',
+                    pathname: path,
                     state: {
                         userAnswers: this.state.userAnswers
                     }
-                }}><button>Get Results</button></Link>
+                }} >
+                <button>Get Results</button>
+                </Link>
+
                 </form>
 
             </div>

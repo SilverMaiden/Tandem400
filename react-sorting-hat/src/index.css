@@ -35,6 +35,46 @@ img {
     font-style: italic;
 }
 .container p {
-    width: 50%;
+    border-radius: 25px;
+    border: dotted 1px grey;
+    padding: 2%;
+    width: 40%;
     text-align: justify;
+    margin-bottom: 10%;
+}
+
+.form-container {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    text-align: center;
+}
+
+.myborder {
+    border: solid 2px black;
+    border-radius: 15px;
+    width: 40%;
+    padding: 2%;
+
+}
+
+
+.column {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+
+}
+
+.answers {
+    text-align: left;
+    margin-top: 1%;
+    border: grey dotted 1px;
+    border-radius: 25px;
+    width: 50%;
+    padding: 2%;
+}
+
+.answers input {
+    margin-right: 2%;
 }

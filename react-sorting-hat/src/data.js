@@ -38,7 +38,7 @@ export const houses = {
                         "Cold"
                     ],
                     img: "https://i.ibb.co/mbtqRM5/toppng-com-escudo-gryffindor-png-hufflepuff-house-369x452.png",
-                    house_song: "You might belong in Hufflepuff Where they are just and loyal Those patient Hufflepuffs are true And unafraid of toil;",
+                    house_song: "You might belong in Hufflepuff where they are just and loyal, those patient Hufflepuffs are true and unafraid of toil;",
                     house_description: `Hufflepuff values hard work, patience, justice, and loyalty. The house mascot is the badger, and canary yellow and black are its colours. During the books, the Head of this house is the Herbology Professor Pomona Sprout, and the house ghost is the Fat Friar. According to Rowling, Hufflepuff corresponds roughly to the element of earth. The founder of this house is Helga Hufflepuff.`
     },
     Slytherin: {
