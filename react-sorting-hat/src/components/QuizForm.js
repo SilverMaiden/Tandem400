@@ -1,4 +1,5 @@
 import React, {Component}from "react";
+import {Link} from "react-router-dom";
 import QuestionSelection from "./QuestionSelection";
 let sortingQuestions =  [
     {
@@ -92,7 +93,12 @@ class QuizForm extends Component {
                             />
                         </div>
                 ))}
-                <button>Get Results</button>
+                <Link to={{
+                    pathname: '/results',
+                    state: {
+                        userAnswers: this.state.userAnswers
+                    }
+                }}><button>Get Results</button></Link>
                 </form>
 
             </div>
