@@ -3,3 +3,38 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.gryffindor {
+    background: #740001;
+}
+
+.ravenclaw {
+    background: #0e1a40;
+}
+
+.hufflepuff {
+    background: #ecb939;
+}
+
+.slytherin {
+    background: #1a472a;
+}
+
+img {
+    width: 20%;
+}
+
+.container {
+    display:flex;
+    align-items: center;
+    flex-flow: column nowrap;
+}
+
+.container h5 {
+    width: 67%;
+    font-style: italic;
+}
+.container p {
+    width: 50%;
+    text-align: justify;
+}

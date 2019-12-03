@@ -1,11 +1,12 @@
 import React from "react";
 
 const HousePage = (props) => {
+    let houseClass = props.house.toString().toLowerCase();
     return (
-        <div>
-            <p> Your house is: {props.house}. </p>
+        <div className="container">
+            <h3> Your house is: {props.house}. </h3>
             <img src={props.data.img} />
-            <p> {props.data.house_song} </p>
+            <h5> {props.data.house_song} </h5>
             <p> {props.data.house_description} </p>
         </div>
     )
