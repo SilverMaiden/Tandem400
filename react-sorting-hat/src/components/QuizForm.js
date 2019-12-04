@@ -44,12 +44,8 @@ let sortingQuestions =  [
         answers: ["Hunger", "Cold", "Boredom", "Loneliness"],
         name: "qAnswer6"
     }
-
-
-
 ]
 
-let validForm = false;
 class QuizForm extends Component {
     constructor() {
         super();
@@ -65,18 +61,6 @@ class QuizForm extends Component {
             }
         }
     }
-    componentDidUpdate() {
-        let questionsAnswers = Object.values(this.state.userAnswers);
-        questionsAnswers.map(answer => {
-            switch(answer) {
-                case '' :
-                    validForm = true;
-
-            }
-        });
-
-
-    }
 
     toggleChangeHandler = e => {
         const property = e.target.name;
@@ -84,6 +68,7 @@ class QuizForm extends Component {
         let userAnswers = {...this.state.userAnswers};
         userAnswers[[property]] = val;
         this.setState({userAnswers});
+
     }
 
     handleSubmit = e => {
@@ -91,11 +76,15 @@ class QuizForm extends Component {
     }
 
     render() {
-        let path = validForm ? '/results':'/sorting_quiz';
+
+        let questionsAnswers = Object.values(this.state.userAnswers);
+
+
         return (
             <div className="form-container">
                 This is the Quiz Form.
-                <form onSubmit={this.handleSubmit}  className="myborder">
+                {console.log(this.state)}
+                <form onSubmit={this.handleSubmit} onChange={this.handleFormChange} className="myborder">
                 {this.state.sortingQuestions.map(singleQuestion => (
                         <div >
                             <QuestionSelection
@@ -107,17 +96,15 @@ class QuizForm extends Component {
                         </div>
                 ))}
 
+
+                {!questionsAnswers.includes('') ?
                 <Link to={{
-                    pathname: path,
+                    pathname: '/results',
                     state: {
                         userAnswers: this.state.userAnswers
-                    }
-                }} >
-                <button>Get Results</button>
-                </Link>
-
+                    }}}>
+                <button>Get Results</button> </Link> : <p>Awaiting your answers...</p>}
                 </form>
-
             </div>
         )
     }
