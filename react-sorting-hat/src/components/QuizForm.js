@@ -1,6 +1,7 @@
 import React, {Component}from "react";
 import {Link, Redirect} from "react-router-dom";
 import QuestionSelection from "./QuestionSelection";
+import Results from './Results';
 import { gsap, TimelineLite,TweenLite, CSSPlugin} from "gsap";
 let sortingQuestions =  [
     {
@@ -51,6 +52,8 @@ class QuizForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            index: 0,
+            checked: false,
             sortingQuestions: sortingQuestions,
             userAnswers: {
                 qAnswer1: '',
@@ -71,16 +74,33 @@ class QuizForm extends Component {
 
 
     toggleChangeHandler = e => {
-        const property = e.target.name;
-        const val = e.target.value;
-        let userAnswers = {...this.state.userAnswers};
-        userAnswers[[property]] = val;
-        this.setState({userAnswers});
+        this.setState({checked:false})
+
 
     }
 
     handleSubmit = e => {
         e.preventDefault();
+    }
+
+    handleClick = e => {
+       const property = e.target.name;
+        const val = e.target.value;
+        let userAnswers = {...this.state.userAnswers};
+        userAnswers[[property]] = val;
+        console.log(userAnswers);
+        this.setState({userAnswers});
+
+
+        if (this.state.index < 5) {
+            this.setState({
+                index: this.state.index += 1,
+
+            });
+        }
+        if (this.state.index === 5) {
+            this.setState({check: true})
+        }
     }
 
     render() {
@@ -89,33 +109,35 @@ class QuizForm extends Component {
 
 
         return (
-            <div className="form-container">
+            <div>
+{!questionsAnswers.includes('') ?
+            <Results userAnswers={this.state.userAnswers} />
+                 :
+                    <div className="form-container">
                 This is the Quiz Form.
                 <form onSubmit={this.handleSubmit} onChange={this.handleFormChange} className="myborder">
-                {this.state.sortingQuestions.map((singleQuestion, index) => (
+                {// {this.state.sortingQuestions.map((singleQuestion, index) => (
+                }
                         <div >
-                            <div ref={div => this.myElements[index] = div}>
-                            {console.log(this.myElements[index])}
+                            <div >
                             <QuestionSelection
-                                name={singleQuestion.name}
-                                question={singleQuestion.question}
-                                answers={singleQuestion.answers}
+                                name={this.state.sortingQuestions[this.state.index].name}
+                                question={this.state.sortingQuestions[this.state.index].question}
+                                answers={this.state.sortingQuestions[this.state.index].answers}
                                 handleChange={this.toggleChangeHandler}
+                                handleClick={this.handleClick}
+                                checked={this.state.checked}
                             />
                             </div>
                         </div>
-                ))}
+                    </form>
+                </div>
 
 
-                {!questionsAnswers.includes('') ?
-                <Link to={{
-                    pathname: '/results',
-                    state: {
-                        userAnswers: this.state.userAnswers
-                    }}}>
-                <button>Get Results</button> </Link> : <p>Awaiting your answers...</p>}
-                </form>
-            </div>
+        }
+        </div>
+
+
         )
     }
 }

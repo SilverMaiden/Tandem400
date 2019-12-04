@@ -7,9 +7,10 @@ const Results = (props) => {
     const [userHouse, setUserHouse] = useState([]);
     const [userHouseData, setUserHouseData] = useState([]);
 
+    console.log(props.userAnswers);
 
     useEffect(() => {
-        let userAnswers = Object.values(props.location.state.userAnswers);
+        let userAnswers = Object.values(props.userAnswers);
         let pointsList = {G: 0, R: 0, H:0, S: 0};
         let answersArr = houses.Gryffindor.answers.concat(
                             houses.RavenClaw.answers.concat(
@@ -31,6 +32,7 @@ const Results = (props) => {
         })
 
         let max_key = Object.keys(pointsList).reduce((a, b) => pointsList[a] > pointsList[b] ? a : b);
+        console.log(pointsList);
         switch(max_key) {
             case "G":
                 setUserHouse("Gryffindor");

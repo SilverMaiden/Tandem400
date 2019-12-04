@@ -67,14 +67,40 @@ img {
 }
 
 .answers {
-    text-align: left;
+    text-align: center;
     margin-top: 1%;
-    border: grey dotted 1px;
-    border-radius: 25px;
-    width: 50%;
     padding: 2%;
+    width: 100%;
 }
 
 .answers input {
     margin-right: 2%;
+}
+
+input[type="radio"] {
+  opacity: 0;
+}
+label {
+    display: inline-block;
+    background-color: #ddd;
+    padding: 10px 20px;
+    font-family: sans-serif, Arial;
+    font-size: 16px;
+    border: 2px solid #444;
+    border-radius: 4px;
+}
+
+label:hover {
+  background-color: #dfd;
+}
+label:active {
+    background-color: #bfb;
+    border-color: #4c4;
+
+}
+
+
+ input[type="radio"]:checked + label {
+    background-color: #bfb;
+    border-color: #4c4;
 }
