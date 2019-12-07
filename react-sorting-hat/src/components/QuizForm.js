@@ -1,4 +1,4 @@
-import React, {Component}from "react";
+import React, {Component, createRef}from "react";
 import {Link, Redirect} from "react-router-dom";
 import QuestionSelection from "./QuestionSelection";
 import Results from './Results';
@@ -48,10 +48,12 @@ let sortingQuestions =  [
     }
 ]
 
+
 class QuizForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            exiting: false,
             index: 0,
             checked: false,
             sortingQuestions: sortingQuestions,
@@ -64,14 +66,26 @@ class QuizForm extends Component {
                 qAnswer6: ''
             }
         }
-        this.myElements = [];
-        this.tl = new TimelineLite();
+        this.timeline = new TimelineLite({ paused: true });
+        this.onLoadTimeline = new TimelineLite({ paused: true});
+        this.onLoadTimelineForm = new TimelineLite({ paused: true});
+        this.boxTimeline = new TimelineLite({paused: true});
+        this.ref1 = createRef();
+        this.ref2 = createRef();
+
+
     }
 
     componentDidMount() {
-        this.tl.staggerFrom(this.myElements, 2, {opacity:0, autoAlpha: 1}, 0.5);
-    }
+        this.onLoadTimeline
+            .add(TweenLite.from(this.ref1.current, 2, { opacity: 0 }))
+            .play();
+        this.onLoadTimelineForm
+            .add(TweenLite.from(this.ref2.current, 2, { opacity: 0}))
+            .play();
 
+
+    }
 
     toggleChangeHandler = e => {
         this.setState({checked:false})
@@ -84,57 +98,70 @@ class QuizForm extends Component {
     }
 
     handleClick = e => {
-       const property = e.target.name;
+        const currentIndex = this.state.index;
+        const property = e.target.name;
         const val = e.target.value;
         let userAnswers = {...this.state.userAnswers};
         userAnswers[[property]] = val;
         console.log(userAnswers);
         this.setState({userAnswers});
+        const setter = () => {
+            if (this.state.index < 5) {
+                let prevHeightVal = this.ref1.current.style.height;
+                this.setState({
+                    index: this.state.index += 1,
+                });
+                let myBox = document.getElementsByTagName('form');
+                  this.boxTimeline
+                    .add(TweenLite.set(this.ref1.current, {height: "auto"}))
+                    .add(TweenLite.from(this.ref1.current,0.75, {height: prevHeightVal}))
+                  .play()
+            }
 
+            if (this.state.index === 5) {
+                this.setState({check: true})
+            }
 
-        if (this.state.index < 5) {
-            this.setState({
-                index: this.state.index += 1,
-
-            });
+            this.timeline
+              .reverse();
         }
-        if (this.state.index === 5) {
-            this.setState({check: true})
+
+        setTimeout(setter, 1000);
+
+
+
+        if (currentIndex === this.state.index) {
+            this.timeline
+              .add(TweenLite.to(this.ref1.current, 1, { opacity: 0 }))
+              .play();
         }
     }
-
     render() {
 
         let questionsAnswers = Object.values(this.state.userAnswers);
 
 
         return (
-            <div>
-{!questionsAnswers.includes('') ?
-            <Results userAnswers={this.state.userAnswers} />
-                 :
-                    <div className="form-container">
-                This is the Quiz Form.
-                <form onSubmit={this.handleSubmit} onChange={this.handleFormChange} className="myborder">
-                {// {this.state.sortingQuestions.map((singleQuestion, index) => (
-                }
-                        <div >
-                            <div >
-                            <QuestionSelection
-                                name={this.state.sortingQuestions[this.state.index].name}
-                                question={this.state.sortingQuestions[this.state.index].question}
-                                answers={this.state.sortingQuestions[this.state.index].answers}
-                                handleChange={this.toggleChangeHandler}
-                                handleClick={this.handleClick}
-                                checked={this.state.checked}
-                            />
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
-
-        }
+            <div className="position">
+            {!questionsAnswers.includes('') ?
+                <Results userAnswers={this.state.userAnswers} />
+                     :
+                <div className="container">
+                    <form ref={this.ref2} id="#myForm" onSubmit={this.handleSubmit} className="myBox">
+                                <QuestionSelection
+                                    name={this.state.sortingQuestions[this.state.index].name}
+                                    question={this.state.sortingQuestions[this.state.index].question}
+                                    answers={this.state.sortingQuestions[this.state.index].answers}
+                                    handleChange={this.toggleChangeHandler}
+                                    handleClick={this.handleClick}
+                                    checked={this.state.checked}
+                                    animationRef={this.ref1}
+                                    timeline={this.timeline}
+                                    index={this.state.index}
+                                />
+                        </form>
+                    </div>
+            }
         </div>
 
 

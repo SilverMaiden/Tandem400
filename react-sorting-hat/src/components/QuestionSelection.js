@@ -1,15 +1,21 @@
-import React, {useState} from "react";
+import React, {useState,useRef, useLayoutEffect, useEffect} from "react";
+import { gsap, TimelineLite,TweenLite, CSSPlugin} from "gsap";
+const duration = 300;
 
-const QuestionSelection = (props) => {
+
+
+const QuestionSelection = (props, {in: inProp}) => {
     let myId=0;
+    let myRef = useRef(null);
+
 
     return (
-                            <div className="column">
+                            <div className="formSpacing" ref={props.animationRef} >
                             {console.log(props.checked)}
                                 <h4> {props.question} </h4>
                                 {props.answers.map(element => (
                                     myId=Math.random(),
-                                   <div >
+                                   <div  >
                                         {console.log}
                                         <input
 
@@ -21,7 +27,7 @@ const QuestionSelection = (props) => {
                                             onChange={props.handleChange}
                                             onClick={props.handleClick}
                                         />
-                                        <label className="answers" htmlFor={myId}>{element}</label>
+                                        <label className="answers labelText" htmlFor={myId}>{element}</label>
                                     </div>
                                 ))}
                             </div>

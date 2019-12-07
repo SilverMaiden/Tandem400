@@ -1,4 +1,5 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useRef, useEffect} from "react";
+import { gsap, TimelineLite,TweenLite, CSSPlugin} from "gsap";
 import {houses} from "../data";
 import HousePage from "./HousePage";
 
@@ -6,8 +7,18 @@ const Results = (props) => {
 
     const [userHouse, setUserHouse] = useState([]);
     const [userHouseData, setUserHouseData] = useState([]);
+    const timeline = new TimelineLite({ paused: true});
+    const ref1 = useRef();
 
     console.log(props.userAnswers);
+
+    useEffect(() => {
+        timeline
+          .add(TweenLite.from(ref1.current, 1, { opacity: 0 }))
+          .play();
+    }, []);
+
+
 
     useEffect(() => {
         let userAnswers = Object.values(props.userAnswers);
@@ -54,9 +65,9 @@ const Results = (props) => {
 
     let userHouseStr = userHouse;
     return (
-        <div>
+        <div ref={ref1} className="myBox">
             <h1> Here are your results!</h1>
-            {userHouseData ? <HousePage house={userHouse} data={userHouseData} /> : <p> Loading... </p>}
+            {userHouseData ? <HousePage house={userHouse} data={userHouseData} /> : ""}
         </div>
     )
 }
