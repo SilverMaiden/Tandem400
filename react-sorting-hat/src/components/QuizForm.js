@@ -84,6 +84,15 @@ class QuizForm extends Component {
             .add(TweenLite.from(this.ref2.current, 2, { opacity: 0}))
             .play();
 
+        let myBox = document.getElementsByTagName('form');
+        let prevHeightVal = this.ref1.current.style.height;
+          this.boxTimeline
+            .add(TweenLite.set(this.ref1.current, {height: "auto"}))
+            .add(TweenLite.from(this.ref1.current,0.75, {height: prevHeightVal}))
+          .play()
+
+
+
 
     }
 
