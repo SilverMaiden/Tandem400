@@ -1,19 +1,33 @@
-import React, {useState} from "react";
+import React, {useState,useRef, useLayoutEffect, useEffect} from "react";
+import { gsap, TimelineLite,TweenLite, CSSPlugin} from "gsap";
+const duration = 300;
 
-const QuestionSelection = (props) => {
+
+
+const QuestionSelection = (props, {in: inProp}) => {
+    let myId=0;
+    let myRef = useRef(null);
+
 
     return (
-                            <div>
+                            <div className="formSpacing" ref={props.animationRef} >
+                            {console.log(props.checked)}
                                 <h4> {props.question} </h4>
                                 {props.answers.map(element => (
-                                   <div>
+                                    myId=Math.random(),
+                                   <div  >
+                                        {console.log}
                                         <input
+
+                                            id={myId}
                                             type="radio"
+                                            checked= {props.checked}
                                             name={props.name}
                                             value={element}
                                             onChange={props.handleChange}
+                                            onClick={props.handleClick}
                                         />
-                                        <label>{element}</label>
+                                        <label className="answers labelText" htmlFor={myId}>{element}</label>
                                     </div>
                                 ))}
                             </div>
