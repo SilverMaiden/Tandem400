@@ -91,13 +91,13 @@ class QuizForm extends Component {
               .reverse();
         }
 
-        setTimeout(setter, 1000);
+        setTimeout(setter, 700);
 
 
 
         if (currentIndex === this.state.index) {
             this.timeline
-              .add(TweenLite.to(this.ref1.current, 1, { opacity: 0 }))
+              .add(TweenLite.to(this.ref1.current, 0.7, { opacity: 0 }))
               .play();
         }
     }

@@ -13,7 +13,7 @@ const Welcome = () => {
                     <h5> to Hogwarts School of Witchcraft and Wizardry!</h5>
                     <h6> Choices, choices... </h6>
 
-                    <Link to="/sorting_quiz"><button> Put on the sorting hat </button></Link>
+                    <Link to="/sorting_quiz" style={{textDecoration: "none"}}><button className="welcomeButton"  > Put on the sorting hat </button></Link>
                     </div>
                 </div>
             </div>

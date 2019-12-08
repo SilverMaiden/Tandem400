@@ -3,8 +3,6 @@ body {
   padding: 0;
   font-family: "Gill Sans";
   background-color: black;
-
-
 }
 
 .position {
@@ -24,7 +22,6 @@ body {
   position: fixed;
   right: 0;
   bottom: 0;
-
 }
 
 img {
@@ -46,10 +43,6 @@ img {
     margin-right: 9%;
 }
 
-
-.myBox ::before {
-    background-size: 0;
-}
 
 .myBox {
     backdrop-filter: blur(8px) brightness(20%);
@@ -73,34 +66,10 @@ img {
 }
 
 
-@keyframes anim {
-  0% {
-    display: none;
-    opacity: 0;
-  }
-  1% {
-    display: block;
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-@keyframes lineInserted {
-  from {
-    height: 0;
-  }
-  to {
-    height: 20px; /* your line height here */
-  }
-}
 
 .myBox h1 {
     font-family: New;
     font-size: 4rem;
-    
-
 }
 
 
@@ -127,7 +96,7 @@ label {
  display:inline-block;
  margin:0 0.3em 0.3em 0;
  box-sizing: border-box;
- text-decoration:none;
+ text-decoration: none;
  font-weight:300;
  text-align:center;
  transition: all 0.2s;
@@ -138,11 +107,36 @@ label:hover {
    background-color:purple;
 }
 
-
- input[type="radio"]:checked + label {
-    background-color: #bfb;
-    border-color: #4c4;
+:any-link {
+     text-decoration: none !important;
 }
+
+.welcomeButton{
+
+  padding: 10px;
+  transition: all 0.2s ease-out 0s;
+    border: solid white 0.5px;
+    color: white;
+    background-color: transparent;
+    border-radius: 5px !important;
+	display: block;
+  margin: 10px auto;
+  margin-bottom: 0;
+font-size: 15px;
+ text-align:center;
+ transition: all 0.2s;
+
+
+}
+
+.welcomeButton:hover {
+   background-color:purple;
+
+
+}
+
+
+
 .labelText {
     width: 60%;
 	text-align: center;
@@ -152,26 +146,3 @@ label:hover {
 }
 
 
-@keyframes move {
-	0% {
-		transform: translatex(-140px);
-	}
-	25% {
-		transform: translatex(140px);
-		opacity: 0.3;
-	}
-	50% {
-		transform: translatex(140px);
-		opacity: 1;
-		background: radial-gradient(90px circle at bottom center, rgba(238,88,63,.5) 30%, rgba(255,255,255,0));
-	}
-	75% {
-		transform: translatex(-140px);
-		opacity: 0.3;
-	}
-	100% {
-		opacity: 1;
-		transform: translatex(-140px);
-		background: radial-gradient(90px circle at top center, rgba(238,88,63,.5) 30%, rgba(255,255,255,0));
-	}
-}
