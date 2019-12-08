@@ -5,6 +5,8 @@ import Results from './Results';
 import { gsap, TimelineLite,TweenLite, CSSPlugin} from "gsap";
 import {sortingQuestions} from "../data";
 
+const C = CSSPlugin;
+
 class QuizForm extends Component {
     constructor(props) {
         super(props);
