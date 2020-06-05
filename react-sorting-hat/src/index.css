@@ -12,7 +12,7 @@ body {
 .position {
   z-index: 3;
   position: relative;
-  bottom: 135vh;
+  bottom: 148vh;
   /* what does this do??*/
    height: 0px; 
 
@@ -55,6 +55,7 @@ body {
 
 
 .myBox {
+
   backdrop-filter: blur(8px) brightness(20%);
   -webkit-backdrop-filter: blur(8px) brightness(20%);
   background-blend-mode: darken;
@@ -63,7 +64,7 @@ body {
   border-radius: 10px;
   flex-flow: column nowrap;
   align-items: center;
-  width: 30%;
+  width: 35%;
   padding: 2%;
   margin-top: 5%;
   color: white;
@@ -72,6 +73,7 @@ body {
   webkit-box-shadow:0 0 10px rgba(0, 0, 0, 0.5);
   -moz-box-shadow:0 0 10px rgba(0, 0, 0, 0.5);
   box-shadow:0 0 10px rgba(0, 0, 0, 0.5);
+  zoom: 1.2;
 
 }
 
