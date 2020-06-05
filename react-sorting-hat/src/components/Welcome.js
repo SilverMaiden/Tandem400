@@ -10,10 +10,11 @@ const Welcome = () => {
                 <div className="myBox ">
                 <div className="welcomeDiv">
                     <h1>Welcome...</h1>
+                    <img className="sortingHat" src="https://www.pngkit.com/png/full/167-1676806_harry-potter-sorting-hat-clipart.png" alt="Harry Potter Cartoontransparent png image" />
                     <h5> to Hogwarts School of Witchcraft and Wizardry!</h5>
                     <h6> Choices, choices... </h6>
 
-                    <Link to="/sorting_quiz"><button> Put on the sorting hat </button></Link>
+                    <Link to="/sorting_quiz" style={{textDecoration: "none"}}><button className="welcomeButton"  > Put on the sorting hat </button></Link>
                     </div>
                 </div>
             </div>
