@@ -1,11 +1,14 @@
 import React, {Component, createRef}from "react";
-import {Link, Redirect} from "react-router-dom";
 import QuestionSelection from "./QuestionSelection";
 import Results from './Results';
 import { gsap, TimelineLite,TweenLite, CSSPlugin} from "gsap";
-import {sortingQuestions} from "../data";
+import * as data from "../Apprentice_TandemFor400_Data.json";
 
 const C = CSSPlugin;
+const sortingQuestions = data.default.sort(() => Math.random() - 0.5);
+
+const STARTING_POINTS = 0;
+
 
 class QuizForm extends Component {
     constructor(props) {
@@ -15,14 +18,7 @@ class QuizForm extends Component {
             index: 0,
             checked: false,
             sortingQuestions: sortingQuestions,
-            userAnswers: {
-                qAnswer1: '',
-                qAnswer2: '',
-                qAnswer3: '',
-                qAnswer4: '',
-                qAnswer5: '',
-                qAnswer6: ''
-            }
+            points: STARTING_POINTS
         }
         this.timeline = new TimelineLite({ paused: true });
         this.onLoadTimeline = new TimelineLite({ paused: true});
@@ -46,12 +42,15 @@ class QuizForm extends Component {
         */
         //Mount animation for the Forms height, so it transitions to the next height
         let myBox = document.getElementsByTagName('form');
+        console.log(myBox)
         let prevHeightVal = this.ref1.current.style.height;
-          this.boxTimeline
-            .add(TweenLite.set(this.ref1.current, {height: "auto"}))
-            .add(TweenLite.from(this.ref1.current,0.5, {height: prevHeightVal}))
-          .play()
-    }
+        console.log(prevHeightVal)
+    //       this.boxTimeline
+    //         .add(TweenLite.set(this.ref1.current, {height: "auto"}))
+    //         .add(TweenLite.from(this.ref1.current,0.5, {height: prevHeightVal}))
+    //       .play()
+    // 
+}
 
     toggleChangeHandler = e => {
         this.setState({checked:false})
@@ -63,13 +62,12 @@ class QuizForm extends Component {
 
     handleClick = e => {
         const currentIndex = this.state.index;
-        const property = e.target.name;
         const val = e.target.value;
-        let userAnswers = {...this.state.userAnswers};
-        userAnswers[[property]] = val;
-        this.setState({userAnswers});
+        if (val === this.state.sortingQuestions[this.state.index].correct) {
+            this.setState({points: this.state.points += 1});
+        }
         const setter = () => {
-            if (this.state.index < 5) {
+            if (this.state.index < 9) {
                 let prevHeightVal = this.ref1.current.style.height;
                 this.setState({
                     index: this.state.index += 1,
@@ -81,10 +79,8 @@ class QuizForm extends Component {
                     .add(TweenLite.set(this.ref1.current, {height: "auto"}))
                     .add(TweenLite.from(this.ref1.current,0.5, {height: prevHeightVal}))
                   .play()
-            }
-
-            if (this.state.index === 5) {
-                this.setState({check: true})
+            } else {
+                this.setState({checked: true});
             }
 
             this.timeline
@@ -103,20 +99,20 @@ class QuizForm extends Component {
     }
     render() {
 
-        let questionsAnswers = Object.values(this.state.userAnswers);
-
-
         return (
             <div className="position">
-            {!questionsAnswers.includes('') ?
-                <Results userAnswers={this.state.userAnswers} />
+                
+            {this.state.checked ?
+                <Results 
+                    points={this.state.points}
+                    />
                      :
-                <div className="container">
-                    <form ref={this.ref2} id="#myForm" onSubmit={this.handleSubmit} className="myBox">
+                <div className="myBox">
+                    <form ref={this.ref2} id="#myForm" onSubmit={this.handleSubmit} className="container">
                                 <QuestionSelection
-                                    name={this.state.sortingQuestions[this.state.index].name}
                                     question={this.state.sortingQuestions[this.state.index].question}
-                                    answers={this.state.sortingQuestions[this.state.index].answers}
+                                    incorrect={this.state.sortingQuestions[this.state.index].incorrect}
+                                    correct={this.state.sortingQuestions[this.state.index].correct}
                                     handleChange={this.toggleChangeHandler}
                                     handleClick={this.handleClick}
                                     checked={this.state.checked}
@@ -124,6 +120,7 @@ class QuizForm extends Component {
                                     timeline={this.timeline}
                                     index={this.state.index}
                                 />
+                                
                         </form>
                     </div>
             }

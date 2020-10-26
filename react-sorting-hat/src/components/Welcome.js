@@ -1,5 +1,6 @@
 import React from "react";
 import {Link} from 'react-router-dom';
+import blue_flowers from '../assets/blue_flowers.png';
 
 
 const Welcome = () => {
@@ -9,12 +10,12 @@ const Welcome = () => {
         <div className="container">
                 <div className="myBox ">
                 <div className="welcomeDiv">
-                    <h1>Welcome...</h1>
-                    <img className="sortingHat" src="https://www.pngkit.com/png/full/167-1676806_harry-potter-sorting-hat-clipart.png" alt="Harry Potter Cartoontransparent png image" />
-                    <h5> to Hogwarts School of Witchcraft and Wizardry!</h5>
-                    <h6> Choices, choices... </h6>
+                    <h2>Welcome to...</h2>
+                    <h1>The Tandem of 400!</h1>
+                    <img className="sortingHat" src={blue_flowers} alt="Harry Potter Cartoontransparent png image" />
+                    <h5> Take a break. Stay a while.</h5>
 
-                    <Link to="/sorting_quiz" style={{textDecoration: "none"}}><button className="welcomeButton"  > Put on the sorting hat </button></Link>
+                    <Link to="/sorting_quiz" style={{textDecoration: "none"}}><button className="welcomeButton"  > Take the Quiz </button></Link>
                     </div>
                 </div>
             </div>

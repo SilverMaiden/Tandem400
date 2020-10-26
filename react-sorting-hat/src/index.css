@@ -5,7 +5,7 @@ html {
 body {
   margin: 0;
   padding: 0;
-  font-family: "Gill Sans";
+  font-family: "Futura-medium";
   background-color: black;
 }
 
@@ -70,7 +70,7 @@ body {
   color: white;
   background-size: 3000px;
   transition: height 3s ease-in;
-  webkit-box-shadow:0 0 10px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow:0 0 10px rgba(0, 0, 0, 0.5);
   -moz-box-shadow:0 0 10px rgba(0, 0, 0, 0.5);
   box-shadow:0 0 10px rgba(0, 0, 0, 0.5);
   zoom: 1.2;
@@ -80,8 +80,9 @@ body {
 
 
 .myBox h1 {
-  font-family: New;
+  font-family: "Futura-medium";
   font-size: 4rem;
+  font-weight: 100;
 }
 
 
@@ -114,7 +115,8 @@ label {
 
 label:hover {
  color:black !important;
- background-color:purple;
+ background-color: #677D96	
+ ;
 }
 
 :any-link {
@@ -136,7 +138,8 @@ label:hover {
 }
 
 .welcomeButton:hover {
-   background-color:purple;
+   background-color:#677D96	
+   ;
 }
 
 .labelText {

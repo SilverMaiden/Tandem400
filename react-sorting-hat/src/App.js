@@ -13,7 +13,7 @@ class App extends Component {
 
         <div className="App">
       <video className="myVideo" autoPlay muted loop >
-              <source src="/Videos/greathall.mp4"  type="video/mp4" />
+              <source src="/Videos/light_garden_field.mp4"  type="video/mp4" />
             </video>
 
 
