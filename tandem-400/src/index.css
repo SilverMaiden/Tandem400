@@ -12,9 +12,8 @@ body {
 .position {
   z-index: 3;
   position: relative;
-  bottom: 148vh;
+  margin-top: -150vh !important;
   /* what does this do??*/
-   height: 0px; 
 
   /*where is this being used??*/
   /*width: 148.5%;*/

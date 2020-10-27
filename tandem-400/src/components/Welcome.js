@@ -7,18 +7,15 @@ const Welcome = () => {
     return (
         <div className=" position ">
 
-        <div className="container">
-                <div className="myBox ">
-                <div className="welcomeDiv">
+                <div className="myBox">
                     <h2>Welcome to...</h2>
                     <h1>Tandem of 400!</h1>
                     <img className="sortingHat" src={blue_flowers} alt="blue flower png image" />
-                    <h5> Take a break. Stay a while.</h5>
+                    <h4> Relax. Take Our Quiz.</h4>
+                    <h5> Sometimes you've got to just take a break, step away, and breathe. :)</h5>
 
                     <Link to="/quiz" style={{textDecoration: "none"}}><button className="welcomeButton"  > Let's Start! </button></Link>
                     </div>
-                </div>
-            </div>
         </div>
     )
 }

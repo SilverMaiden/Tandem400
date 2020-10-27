@@ -45,11 +45,11 @@ class QuizForm extends Component {
         console.log(myBox)
         let prevHeightVal = this.ref1.current.style.height;
         console.log(prevHeightVal)
-    //       this.boxTimeline
-    //         .add(TweenLite.set(this.ref1.current, {height: "auto"}))
-    //         .add(TweenLite.from(this.ref1.current,0.5, {height: prevHeightVal}))
-    //       .play()
-    // 
+           this.boxTimeline
+             .add(TweenLite.set(this.ref1.current, {height: "100%"}))
+             .add(TweenLite.from(this.ref1.current,0.5, {height: "0%"}))
+           .play()
+
 }
 
     toggleChangeHandler = e => {
@@ -101,9 +101,9 @@ class QuizForm extends Component {
 
         return (
             <div className="position">
-                
+
             {this.state.checked ?
-                <Results 
+                <Results
                     points={this.state.points}
                     />
                      :
@@ -120,7 +120,7 @@ class QuizForm extends Component {
                                     timeline={this.timeline}
                                     index={this.state.index}
                                 />
-                                
+
                         </form>
                     </div>
             }

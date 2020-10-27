@@ -14,6 +14,10 @@ class App extends Component {
         <div className="App">
       <video className="myVideo" autoPlay muted loop >
               <source src="/Videos/water.mp4"  type="video/mp4" />
+              <Route exact path="/" component={Welcome} />
+                <Route path="/quiz" component={QuizForm} />
+                <Route path="/results" component={Results} />
+
             </video>
 
 
