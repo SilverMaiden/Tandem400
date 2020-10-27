@@ -21,6 +21,7 @@ const Results = (props) => {
 
 
     return (
+        <div className="position">
         <div ref={ref1} className="myBox">
             <h2>..And we're done!</h2>
             <img className="sortingHat" src={blue_flowers} alt="Harry Potter Cartoontransparent png image" />
@@ -28,6 +29,7 @@ const Results = (props) => {
             <h4> Hopefully this was somewhat relaxing, and now you're ready to get back to work! </h4>
             <h5> (Although...you <b>could</b> always <Link to="/">take our quiz again...</Link>)</h5>
         </div>
+    </div>
     )
 }
 
